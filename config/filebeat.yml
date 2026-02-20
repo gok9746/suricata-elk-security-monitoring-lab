@@ -1,0 +1,33 @@
+ 
+filebeat.inputs:
+
+  - type: container
+    paths:
+      - /var/lib/docker/containers//.log
+    processors:
+      - add_docker_metadata:
+          host: "unix:///var/run/docker.sock"
+
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/suricata/eve.json
+    fields:
+      log_type: suricata
+    fields_under_root: true
+
+  - type: log
+    enabled: true
+    paths:
+      - /home/cowrie/cowrie/var/log/cowrie/cowrie.log
+    fields:
+      log_type: cowrie
+    fields_under_root: true
+
+output.logstash:
+  hosts: ["localhost:5000"]
+
+setup.kibana:
+  host: "localhost:5601"
+
+logging.level: info

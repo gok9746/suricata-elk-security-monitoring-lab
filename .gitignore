@@ -1,0 +1,13 @@
+*.log
+*.pcap
+*.json
+node_modules/
+
+# Suricata large upstream rulesets (don't commit)
+config/rules/suricata.rules
+config/rules/*.rules
+!config/rules/local.rules
+# Do NOT commit large upstream Suricata rulesets (GitHub push protection false positives)
+config/rules/suricata.rules
+config/rules/*.rules
+!config/rules/local.rules
